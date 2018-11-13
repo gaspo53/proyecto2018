@@ -1,3 +1,4 @@
+  DROP DATABASE IF EXISTS proyecto_2018_parcial;
   CREATE DATABASE proyecto_2018_parcial;
   USE proyecto_2018_parcial;
 

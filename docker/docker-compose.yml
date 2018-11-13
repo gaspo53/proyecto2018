@@ -22,6 +22,7 @@ services:
     container_name: apache
   mysql:
     build: './mysql/'
+    restart: always
     networks:
       - backend
     environment:
