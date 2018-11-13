@@ -1,0 +1,35 @@
+version: "3.2"
+services:
+  php:
+    build: './php/'
+    networks:
+      - backend
+    volumes:
+      - ${REPO_PATH}:/var/www/html/
+    container_name: php
+  apache:
+    build: './apache/'
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "8080:80"
+    volumes:
+      - ${REPO_PATH}:/var/www/html/
+    container_name: apache
+  mysql:
+    build: './mysql/'
+    networks:
+      - backend
+    environment:
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_USERNAME=${MYSQL_USERNAME}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=admin
+    container_name: mysql
+networks:
+  frontend:
+  backend:
